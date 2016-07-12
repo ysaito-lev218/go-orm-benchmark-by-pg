@@ -4,7 +4,7 @@ import "github.com/go-xorm/xorm"
 
 func XormRead(id int) {
 
-	connString := "host=localhost user=postgres password=postgres dbname=test sslmode=disable"
+	connString := "host=192.168.200.10 user=postgres password=postgres dbname=test sslmode=disable"
 	engine, _ := xorm.NewEngine("postgres", connString)
 
 	db := engine.NewSession()
@@ -13,8 +13,8 @@ func XormRead(id int) {
 	}
 	defer db.Close()
 
-	user := User{Id: id}
-	if _, err := db.Get(&user); err != nil {
+	user := User{}
+	if _, err := db.Id(id).Get(&user); err != nil {
 		panic(err)
 	}
 }

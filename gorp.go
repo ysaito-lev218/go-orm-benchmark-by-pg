@@ -7,17 +7,17 @@ import (
 )
 
 func GorpRead(id int) {
-	connString := "host=localhost user=postgres password=postgres dbname=test sslmode=disable"
-	db, err := sql.Open("postgres", connString)
-	if err != nil {
 
-	}
+	connString := "host=192.168.200.10 user=postgres password=postgres dbname=test sslmode=disable"
+
+	db, err := sql.Open("postgres", connString)
+	checkErr(err)
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
+	dbmap.AddTableWithName(User{}, "users").SetKeys(true, "Id")
 	defer dbmap.Db.Close()
 
-	var users []User
-	//err = dbmap.SelectOne(&p2, "select * from posts where post_id=?", p2.Id)
-	if _, err = dbmap.Select(&users, "select * from users"); err != nil {
+	tb := User{}
+	if _, err := dbmap.Get(&tb, 1); err != nil {
 		panic(err)
 	}
 }

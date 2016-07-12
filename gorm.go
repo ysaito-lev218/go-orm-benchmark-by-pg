@@ -9,7 +9,7 @@ import (
 
 func GormRead(id int) {
 
-	connString := "host=localhost user=postgres password=postgres dbname=test sslmode=disable"
+	connString := "host=192.168.200.10 user=postgres password=postgres dbname=test sslmode=disable"
 	db, err := gorm.Open("postgres", connString)
 	if err != nil {
 		fmt.Println(err)

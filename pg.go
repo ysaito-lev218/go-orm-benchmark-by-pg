@@ -7,7 +7,7 @@ import (
 func PgRead(id int) {
 
 	db := pg.Connect(&pg.Options{
-		Addr: "192.168.144.10:5432",
+		Addr: "192.168.200.10:5432",
 		User: "postgres",
 		Password: "postgres",
 		Database: "test",
